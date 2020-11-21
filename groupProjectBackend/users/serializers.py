@@ -1,7 +1,7 @@
 from rest_framework import serializers 
 from .models import CustomUser
-from opportunity.model import Opportunity
-import django
+from opportunity.models import Opportunity
+from django.utils import timezone
 from opportunity.serializers import OpportunitySerializer
 
 class CustomUserSerializer(serializers.Serializer):

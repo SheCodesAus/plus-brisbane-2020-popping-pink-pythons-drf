@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.db import models
 
 class Opportunity(models.Model):
@@ -14,11 +14,11 @@ class Opportunity(models.Model):
     amount = models.IntegerField()
     opp_type = models.TextField()
     opp_link = models.URLField(null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
     owner = models.ForeignKey(
-        get_user_model(),
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='owner_opportunity'
     )
-    date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
     
