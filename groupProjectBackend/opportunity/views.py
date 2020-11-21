@@ -16,7 +16,7 @@ class OpportunityList(APIView):
 
     ##Returning opportunities in decreasing order of last update
     def get(self, request):
-        opportunities = Opportunity.objects.all.order_by(date_updated)
+        opportunities = Opportunity.objects.all()
         serializer = OpportunitySerializer(opportunities, many=True)
         return Response(serializer.data)
 
