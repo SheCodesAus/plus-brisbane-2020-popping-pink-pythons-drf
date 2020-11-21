@@ -23,3 +23,26 @@ class OpportunitySerializer(serializers.Serializer):
         duration = (obj.close_date - obj.start_date).days
         return duration
     
+    def create(self, validated_data):
+        return Opportunity.objects.create(**validated_data)
+    
+
+class OpportunityDetailSerializer(OpportunitySerializer):
+    
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.location = validated_data.get('location', instance.title)
+        instance.organization = validated_data.get('organization', instance.organization)
+        instance.description = validated_data.get('description', instance.description)
+        instance.objectives = validated_data.get('objectives', instance.objectives)
+        instance.image = validated_data.get('image', instance.image)
+        instance.start_date = validated_data.get('start_date',instance.start_date)
+        instance.close_date = validated_data.get('close_date',instance.close_date) 
+        instance.amount = validated_data.get('amount', instance.amount)
+        instance.opp_type = validated_data.get('opp_type', instance.opp_type)
+        instance.opp_type = validated_data.get('opp_link', instance.opp_link)
+        instance.save()
+        return instance
+
+        
+        
