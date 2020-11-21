@@ -5,7 +5,8 @@ from rest_framework import status, permissions
 from .models import CustomUser
 from .serializers import CustomUserSerializer, CustomUserDetailSerializer
 from django.db import transaction
-# from .permissions import IsUserOrReadOnly
+from opportunity.models import Opportunity
+from .permissions import IsUserOrReadOnly
 
 class CustomUserList(APIView):
 
@@ -70,11 +71,10 @@ class UserFavouriteView(APIView):
     #     serializer = CustomUserDetailSerializer(user)
     #     return Response(serializer.data)
 
-    def post(self, request):
-        user = request.user
-        serializer = OpportunitySerializer(data = request.data)
-        if serializer.is_valid():
-            with transaction.atomic(
-                opportunity = Opportunity.objects.get(pk=validated_data.get('pk'))
-                user.favourites.add(opportunity)             
-            )
+    # def post(self, request):
+    #     user = self.get_object(pk)
+    #     serializer = OpportunitySerializer(data = request.data)
+    #     if serializer.is_valid():
+    #         with transaction.atomic():
+    #             opportunity = Opportunity.objects.get(pk=validated_data.get('pk')
+    #             user.favourites.save(opportunity)
