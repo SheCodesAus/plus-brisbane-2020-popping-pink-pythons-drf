@@ -73,8 +73,8 @@ class OpportunityDetail(APIView):
 
 
 class OpportunityLatest(APIView):
-    # Return 5 or 4?
+    # Return 5 ?
     def get(self, request, pk):
         favourites = Opportunity.objects.all().order_by('-date_updated')
-        return favourites[:4]
+        return favourites
 
