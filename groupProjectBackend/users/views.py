@@ -22,8 +22,8 @@ class CustomUserList(APIView):
         return Response(serializer.errors)
 
 class CustomUserDetail(APIView):
-    # permission_classes = [IsUserOrReadOnly
-    # ]
+    permission_classes = [IsUserOrReadOnly
+    ]
 
     def get_object(self, pk):
         try:
@@ -56,6 +56,8 @@ class CustomUserDetail(APIView):
         )
 
 class UserFavouriteView(APIView):
+    permission_classes = [IsUserOrReadOnly
+    ]
 
     def get_user(self, request):
         return request.user
