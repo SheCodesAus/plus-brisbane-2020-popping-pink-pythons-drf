@@ -15,10 +15,8 @@ class CustomUserSerializer(serializers.Serializer):
     opportunity_owner = serializers.BooleanField(default=False)
     date_created = serializers.DateTimeField(default = timezone.now)
     num_fav = serializers.SerializerMethodField()
-    # 
-    # favourites = serializers.ReadOnlyField(many=True)
-    #  Look at creating a new Opportunity Serializer
-    #  favourites = OpportunitySerializer(many=True, read_only=True)
+    
+    favourites = OpportunitySerializer(many=True, read_only=True)
    
     def create(self, validated_data):
         return CustomUser.objects.create_user(**validated_data)
@@ -27,6 +25,8 @@ class CustomUserSerializer(serializers.Serializer):
         pass
 
 class CustomUserDetailSerializer(CustomUserSerializer):
+
+    favourites = OpportunitySerializer(many=True, read_only=True)
 
     def update(self, instance, validated_data):
         instance.bio = validated_data.get('bio', instance.bio)
