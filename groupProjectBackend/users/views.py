@@ -57,6 +57,15 @@ class CustomUserDetail(APIView):
             status = status.HTTP_400_BAD_REQUEST
         )
 
+    def delete(self, request, pk):
+        try:
+            user_to_delete = self.get_object(pk)    
+            user_to_delete.delete()    
+            return Response(status=status.HTTP_204_NO_CONTENT)    
+        except Http404:   
+            return Http404
+    
+
 class UserFavouriteView(APIView):
     permission_classes = [IsUserOrReadOnly
     ]
