@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Opportunity
+from django.utils import timezone
 
 class OpportunitySerializer(serializers.Serializer):
     id=serializers.ReadOnlyField()
@@ -10,8 +11,8 @@ class OpportunitySerializer(serializers.Serializer):
     objectives = serializers.CharField(max_length = 200, required=False)
     image = serializers.URLField(required=False)
     duration = serializers.SerializerMethodField()
-    start_date = serializers.DateTimeField()
-    close_date = serializers.DateTimeField()
+    start_date = serializers.DateField()
+    close_date = serializers.DateField(required=False)
     amount = serializers.IntegerField(required=False)
     opp_type = serializers.CharField(max_length = 200)
     opp_link = serializers.URLField(required=False)
