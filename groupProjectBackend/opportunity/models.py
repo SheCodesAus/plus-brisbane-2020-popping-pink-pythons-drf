@@ -8,7 +8,6 @@ class Opportunity(models.Model):
     description = models.TextField()
     objectives = models.TextField()
     image = models.URLField(null=True)
-    # duration = models.IntegerField()
     start_date = models.DateField()
     close_date = models.DateField()
     amount = models.IntegerField()
