@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 from .models import CustomUser
 from .serializers import CustomUserSerializer, CustomUserDetailSerializer
+from opportunity.serializers import FaveOpportunitySerializer
 from django.db import transaction
 from opportunity.models import Opportunity
 from .permissions import IsUserOrReadOnly
@@ -71,7 +72,7 @@ class UserFavouriteView(APIView):
 
     def post(self, request):
         user = request.user
-        serializer = OpportunitySerializer(data = request.data)
+        serializer = FaveOpportunitySerializer(data = request.data)
         if serializer.is_valid():
             with transaction.atomic():
                 opportunity = Opportunity.objects.get(pk=validated_data.get('pk'))

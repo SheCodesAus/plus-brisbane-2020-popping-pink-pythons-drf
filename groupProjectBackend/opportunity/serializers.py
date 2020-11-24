@@ -45,5 +45,8 @@ class OpportunityDetailSerializer(OpportunitySerializer):
         instance.save()
         return instance
 
-        
+
+class FaveOpportunitySerializer(OpportunitySerializer):
+    id=serializers.ReadOnlyField()
+    title=serializers.ReadOnlyField()
         
