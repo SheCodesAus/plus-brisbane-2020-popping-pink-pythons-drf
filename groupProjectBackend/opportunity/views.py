@@ -77,4 +77,3 @@ class OpportunityLatest(APIView):
     def get(self, request, pk):
         favourites = Opportunity.objects.all().order_by('-date_updated')
         return favourites
-
