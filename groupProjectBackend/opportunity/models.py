@@ -18,6 +18,7 @@ class Opportunity(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        # allow for owner to delete themselves - not to be deleted. 
         related_name='owner_opportunity'
     )
     

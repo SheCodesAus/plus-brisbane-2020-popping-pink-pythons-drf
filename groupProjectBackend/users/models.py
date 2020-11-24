@@ -6,7 +6,8 @@ from opportunity.models import Opportunity
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=200)
     bio = models.TextField()
-    image = models.URLField(default="")
+    image = models.URLField(default="") 
+    # Add default image as silhouette image - can be handled in React. Anything non-human
     opportunity_owner = models.BooleanField(default=False)
     date_created = models.DateTimeField(default=timezone.now)
     num_fav = models.IntegerField(default=0)

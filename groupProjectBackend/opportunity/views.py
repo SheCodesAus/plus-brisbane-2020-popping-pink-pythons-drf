@@ -77,4 +77,3 @@ class OpportunityLatest(APIView):
         latest = Opportunity.objects.all().order_by('-date_updated')[:5]
         serializer = OpportunityDetailSerializer(latest, many=True)
         return Response(serializer.data)
-

@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 from .models import CustomUser
 from .serializers import CustomUserSerializer, CustomUserDetailSerializer
+from opportunity.serializers import FaveOpportunitySerializer
 from django.db import transaction
 from opportunity.models import Opportunity
 from .permissions import IsUserOrReadOnly
@@ -60,21 +61,27 @@ class UserFavouriteView(APIView):
     permission_classes = [IsUserOrReadOnly
     ]
 
-    def get_user(self, request):
-        return request.user
-
-    def get_queryset():
-        queryset = user.favourites.all()
+    # def get_queryset():
+    #     user = request.user
+    #     queryset = user.favourites.all()
 
     # def get(self, request, pk):
     #     user = self.get_object(pk)
     #     serializer = CustomUserDetailSerializer(user)
     #     return Response(serializer.data)
 
-    # def post(self, request):
-    #     user = self.get_object(pk)
-    #     serializer = OpportunitySerializer(data = request.data)
-    #     if serializer.is_valid():
-    #         with transaction.atomic():
-    #             opportunity = Opportunity.objects.get(pk=validated_data.get('pk')
-    #             user.favourites.save(opportunity)
+    def post(self, request):
+        user = request.user
+        serializer = FaveOpportunitySerializer(data = request.data)
+        if serializer.is_valid():
+            with transaction.atomic():
+                opportunity = Opportunity.objects.get(pk=validated_data.get('pk'))
+                user.favourites.add(opportunity)
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+        return Response(
+            serializer.errors,
+            status = status.HTTP_400_BAD_REQUEST
+        )
