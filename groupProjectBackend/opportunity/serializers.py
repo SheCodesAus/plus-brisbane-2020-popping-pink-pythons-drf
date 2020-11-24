@@ -46,7 +46,6 @@ class OpportunityDetailSerializer(OpportunitySerializer):
         return instance
 
 
-class FaveOpportunitySerializer(OpportunitySerializer):
-    id=serializers.ReadOnlyField()
-    title=serializers.ReadOnlyField()
+class FaveOpportunitySerializer(serializers.Serializer):
+    id=serializers.IntegerField()
         

@@ -72,10 +72,11 @@ class UserFavouriteView(APIView):
 
     def post(self, request):
         user = request.user
-        serializer = FaveOpportunitySerializer(data = request.data)
+        serializer = FaveOpportunitySerializer(data=request.data)
         if serializer.is_valid():
             with transaction.atomic():
-                opportunity = Opportunity.objects.get(pk=validated_data.get('pk'))
+                print('pk', serializer.validated_data)
+                opportunity = Opportunity.objects.get(pk=serializer.validated_data.get('id'))
                 user.favourites.add(opportunity)
             return Response(
                 serializer.data,
