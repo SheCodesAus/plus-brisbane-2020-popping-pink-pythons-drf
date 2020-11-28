@@ -11,7 +11,7 @@ class CustomUserSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True)
     name = serializers.CharField(max_length=200)
     bio = serializers.CharField(max_length=None, default="")
-    image = serializers.URLField(default="")
+    image = serializers.URLField(default="https://robohash.org/YOUR-TEXT.png")
     opportunity_owner = serializers.BooleanField(default=False)
     date_created = serializers.DateTimeField(default = timezone.now)
     num_fav = serializers.SerializerMethodField()
