@@ -66,6 +66,16 @@ class CustomUserDetail(APIView):
             return Http404
     
 
+class CurrentUserView(APIView):
+    def get(self, request):
+        serializer = CustomUserDetailSerializer(request.user)
+        if request.user.is_authenticated:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(
+            status = status.HTTP_401_UNAUTHORIZED
+        )
+
+
 class UserFavouriteView(APIView):
     permission_classes = [IsUserOrReadOnly
     ]
@@ -95,3 +105,4 @@ class UserFavouriteView(APIView):
             serializer.errors,
             status = status.HTTP_400_BAD_REQUEST
         )
+
