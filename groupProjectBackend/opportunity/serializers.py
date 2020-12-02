@@ -32,7 +32,7 @@ class OpportunityDetailSerializer(OpportunitySerializer):
     
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
-        instance.location = validated_data.get('location', instance.title)
+        instance.location = validated_data.get('location', instance.location)
         instance.organisation = validated_data.get('organization', instance.organisation)
         instance.description = validated_data.get('description', instance.description)
         instance.objectives = validated_data.get('objectives', instance.objectives)
@@ -41,7 +41,7 @@ class OpportunityDetailSerializer(OpportunitySerializer):
         instance.close_date = validated_data.get('close_date',instance.close_date) 
         instance.amount = validated_data.get('amount', instance.amount)
         instance.opp_type = validated_data.get('opp_type', instance.opp_type)
-        instance.opp_type = validated_data.get('opp_link', instance.opp_link)
+        instance.opp_link = validated_data.get('opp_link', instance.opp_link)
         instance.save()
         return instance
 
