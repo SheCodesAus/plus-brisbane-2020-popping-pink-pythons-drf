@@ -22,7 +22,9 @@ class CustomUserSerializer(serializers.Serializer):
         return CustomUser.objects.create_user(**validated_data)
 
     def get_num_fav(self, obj):
-        pass
+        favs = obj.favourites.all()
+        fav_list = len(favs) 
+        return fav_list
 
 class CustomUserDetailSerializer(CustomUserSerializer):
 
